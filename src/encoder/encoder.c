@@ -1214,6 +1214,12 @@ x264_t *x264_encoder_open( x264_param_t *param )
     float *logs = x264_analyse_prepare_costs( h );
     if( !logs )
         goto fail;
+#ifdef WINCE
+#if 0
+	x264_log( h, X264_LOG_ERROR, "logs=%x\n", log2f);
+	x264_log( h, X264_LOG_ERROR, "logs[1]=%f, logs[2013]=%f\n", logs[1], logs[2013]);
+#endif
+#endif
     for( qp = X264_MIN( h->param.rc.i_qp_min, QP_MAX_SPEC ); qp <= h->param.rc.i_qp_max; qp++ )
         if( x264_analyse_init_costs( h, logs, qp ) )
             goto fail;
@@ -1223,6 +1229,12 @@ x264_t *x264_encoder_open( x264_param_t *param )
 
     static const uint16_t cost_mv_correct[7] = { 24, 47, 95, 189, 379, 757, 1515 };
     /* Checks for known miscompilation issues. */
+#ifdef WINCE
+#if 0
+	        x264_log( h, X264_LOG_ERROR, "X264_LOOKAHEAD_QP=%d, BIT_DEPTH=%d\n", X264_LOOKAHEAD_QP, BIT_DEPTH-8 );
+	        x264_log( h, X264_LOG_ERROR, "%d, %d\n",  h->cost_mv[X264_LOOKAHEAD_QP][2013], cost_mv_correct[BIT_DEPTH-8] );
+#endif
+#endif
     if( h->cost_mv[X264_LOOKAHEAD_QP][2013] != cost_mv_correct[BIT_DEPTH-8] )
     {
         x264_log( h, X264_LOG_ERROR, "MV cost test failed: x264 has been miscompiled!\n" );

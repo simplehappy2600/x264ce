@@ -79,7 +79,7 @@ const x264_cpu_name_t x264_cpu_names[] =
     {"", 0},
 };
 
-#if (ARCH_PPC && SYS_LINUX) || (ARCH_ARM && !HAVE_NEON)
+#if (ARCH_PPC && SYS_LINUX) || (ARCH_ARM && !HAVE_NEON && !DR400)
 #include <signal.h>
 #include <setjmp.h>
 static sigjmp_buf jmpbuf;

@@ -36,8 +36,10 @@
 #include "config.h"
 
 #if !HAVE_LOG2F
+#ifndef WINCE
 #define log2f(x) (logf(x)/0.693147180559945f)
 #define log2(x) (log(x)/0.693147180559945)
+#endif
 #endif
 
 #ifdef _WIN32
@@ -58,6 +60,13 @@
 #include <mathimf.h>
 #else
 #include <math.h>
+#endif
+
+#ifdef WINCE
+#if !HAVE_LOG2F
+#define log2f(x) (logf(x)/0.693147180559945f)
+#define log2(x) (log(x)/0.693147180559945)
+#endif
 #endif
 
 #if (defined(__GNUC__) || defined(__INTEL_COMPILER)) && (ARCH_X86 || ARCH_X86_64)

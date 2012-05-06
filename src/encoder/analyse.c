@@ -284,8 +284,44 @@ float *x264_analyse_prepare_costs( x264_t *h )
     if( !logs )
         return NULL;
     logs[0] = 0.718f;
-    for( int i = 1; i <= 2*4*2048; i++ )
+    for( int i = 1; i <= 2*4*2048; i++ ){
         logs[i] = log2f(i+1)*2 + 1.718f;
+#ifdef WINCE
+#if 0
+	if (i == 1 || i == 2013){
+	    x264_log( h, X264_LOG_ERROR, "logs[%d]:%f, %f\n", i,  logs[i], log2f(i+1)*2 + 1.718f);		
+	}
+#endif	
+#endif
+    }
+
+#ifdef WINCE
+	x264_log( h, X264_LOG_ERROR, "log2f=%x\n", log2f);
+
+	int i = 0;
+	for( i = 1; i <= 2*4*2048; i++ ){
+		float v = log2f(i+1)*2 + 1.718f;
+		
+		 if (i == 1 || i == 2013){
+			 x264_log( h, X264_LOG_ERROR, "i=%d, %f\n", i, v);
+		}
+	}
+	i = 1;
+	x264_log( h, X264_LOG_ERROR, "i=%d, %f\n", i, log2f(i+1)*2 + 1.718f);
+	i = 2013;
+	x264_log( h, X264_LOG_ERROR, "i=%d, %f\n", i, log2f(i+1)*2 + 1.718f);
+	
+#endif
+	
+
+#ifdef WINCE
+#if 0
+    x264_log( h, X264_LOG_ERROR, "x264_analyse_prepare_costs\n");
+    x264_log( h, X264_LOG_ERROR, "log2f=%x\n", log2f);
+    x264_log( h, X264_LOG_ERROR, "logs[1]:%f, %f\n", logs[1], log2f(1+1)*2 + 1.718f);
+    x264_log( h, X264_LOG_ERROR, "logs[2013]:%f, %f\n", logs[2013], log2f(2013+1)*2 + 1.718f);
+#endif
+#endif
     return logs;
 }
 

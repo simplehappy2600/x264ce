@@ -1045,6 +1045,10 @@ void x264_log( x264_t *h, int i_level, const char *psz_fmt, ... )
     }
 }
 
+#ifdef WINCE
+extern FILE* logfile;
+#endif
+
 static void x264_log_default( void *p_unused, int i_level, const char *psz_fmt, va_list arg )
 {
     char *psz_prefix;
@@ -1066,8 +1070,13 @@ static void x264_log_default( void *p_unused, int i_level, const char *psz_fmt, 
             psz_prefix = "unknown";
             break;
     }
+#ifdef WINCE
+	fprintf( logfile, "x264 [%s]: ", psz_prefix );
+	vfprintf( logfile, psz_fmt, arg );
+#else
     fprintf( stderr, "x264 [%s]: ", psz_prefix );
     vfprintf( stderr, psz_fmt, arg );
+#endif
 }
 
 /****************************************************************************

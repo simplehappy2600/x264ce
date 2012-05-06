@@ -1,3 +1,27 @@
 readme
 how to compile x264 using arm-mingw32ce
+based on x264-snapshot-20120305-2245-stable
+
+编译器
+mingw32ce-0.59.1.tar.bz2
+
+* common\common.c	输出日志到文件
+* common\cpu.c		编译器支持问题
+* common\osdep.h	编译器支持log2f有问题
+
++ test\x264enc.c	一个简化的编码程序
++ Makefile.x264enc
+
++ test\x264raw.c	x264.c简化版
++ Makefile.x264raw
+
++ config.sh	my configure
+config.h	生成的文件，手动修改过
+
+* x264.c
+
++ x264_config.h
+
+
+
 
