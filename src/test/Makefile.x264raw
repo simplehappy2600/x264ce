@@ -1,0 +1,2 @@
+all:
+	arm-mingw32ce-gcc -g -I. -I.. -L.. -std=c99 -DWINCE -DDR400 x264raw.c ../filters/video/source.o  ../input/raw.o ../input/input.o   ../output/raw.o  -lx264 -lm

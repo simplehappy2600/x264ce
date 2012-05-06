@@ -1,0 +1,4 @@
+all:
+	arm-mingw32ce-gcc -g -I. -I.. -L.. -std=c99 -DWINCE -DDR400 x264enc.c  -lx264 -lm
+clean:
+	rm -f *.exe
